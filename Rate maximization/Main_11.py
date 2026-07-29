@@ -12,10 +12,6 @@ from fPlot import *
 sys_param = sys_param
 
 
-# =====================================================
-# Fig. 11 settings
-# =====================================================
-
 sys_param["N"] = 5
 
 sys_param["P_total_dBm"] = 10
@@ -26,13 +22,12 @@ sys_param["epsilon"] = 0.20
 
 sys_param["KL_threshold"] = 2 * sys_param["epsilon"] ** 2
 
-# Same radar MI threshold used in your rate-maximization subsection
+######### Same radar MI threshold used in your rate-maximization subsection ######
+
 sys_param["gamma_MI"] = 1.0
 
 sys_param["gamma_SINR"] = 2 ** (2 * sys_param["gamma_MI"]) - 1
 
-
-# x-axis values for Fig. 11
 v_w_cand = np.array([
     0.001,
     0.005,
