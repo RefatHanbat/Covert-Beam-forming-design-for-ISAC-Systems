@@ -16,10 +16,6 @@ from fPlot import *
 sys_param = sys_param
 
 
-# =====================================================
-# Fig. 5 settings
-# =====================================================
-
 sys_param["N"] = 5
 
 sys_param["P_total_dBm"] = 10
@@ -35,17 +31,8 @@ epsilon_cand = np.arange(
     step=0.02
 )
 
-
 num_samples = 20
 
-# Later use:
-# num_samples = 100
-# num_samples = 1000
-
-
-# =====================================================
-# Result arrays
-# =====================================================
 
 MI_D01_result = np.zeros(np.size(epsilon_cand))
 
@@ -68,10 +55,8 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
 
     sys_param["KL_threshold"] = 2 * epsilon ** 2
 
-
-    # =====================================================
-    # Case 1: D(p0 || p1) <= 2 epsilon^2
-    # =====================================================
+    ############# Case 1: D(p0 || p1) <= 2 epsilon^2 ###################
+    
 
     t_max_D01 = myf_find_t_max_case(
         sys_param,
@@ -79,9 +64,9 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
     )
 
 
-    # =====================================================
-    # Case 2: D(p1 || p0) <= 2 epsilon^2
-    # =====================================================
+    
+    ############ Case 2: D(p1 || p0) <= 2 epsilon^2 ###################
+    
 
     t_max_D10 = myf_find_t_max_case(
         sys_param,
@@ -105,10 +90,6 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
     for ind_sample in tqdm(range(0, num_samples)):
 
 
-        # =====================================================
-        # Generate estimated channel
-        # =====================================================
-
         param_channel = {}
 
         param_channel["seed_seq"] = ind_sample
@@ -117,11 +98,6 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
             sys_param,
             param_channel
         )
-
-
-        # =====================================================
-        # Generate true Willie channel
-        # =====================================================
 
         param_error = {}
 
@@ -132,11 +108,6 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
             channel,
             param_error
         )
-
-
-        # =====================================================
-        # Design under D(p0 || p1) constraint
-        # =====================================================
 
         sys_param["t_max"] = t_max_D01
 
@@ -163,9 +134,9 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
         )
 
 
-        # =====================================================
-        # Design under D(p1 || p0) constraint
-        # =====================================================
+       
+        ############### Design under D(p1 || p0) constraint ########################
+        
 
         sys_param["t_max"] = t_max_D10
 
@@ -191,10 +162,6 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
             solutions_D10["W_R_1"]
         )
 
-
-    # =====================================================
-    # Average over samples
-    # =====================================================
 
     MI_D01_result[ind_epsilon] = np.nanmean(MI_D01_temp)
 
@@ -232,11 +199,6 @@ for ind_epsilon in range(0, np.size(epsilon_cand)):
     print("P_MD D10 =", P_MD_D10_result[ind_epsilon])
 
     print("===================================")
-
-
-# =====================================================
-# Plot Fig. 5
-# =====================================================
 
 myf_plot_Fig5(
     sys_param,

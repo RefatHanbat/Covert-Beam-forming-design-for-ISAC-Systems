@@ -21,10 +21,7 @@ num_samples = 50
 
 # num_samples = sys_param["num_CDF_samples"]
 
-
-
 ############ Find t_max from KL threshold #####################
-
 
 sys_param["t_max"] = myf_find_t_max(sys_param)
 
@@ -81,11 +78,8 @@ for ind1 in tqdm(range(0, num_samples)):
         solutions_nonrobust["W_R_1"]
     )
 
-
-    # =====================================================
-    # Robust design
-    # Uses multiple perturbed Willie channels
-    # =====================================================
+    ########## Robust design #############
+    
 
     param_robust = {}
 
@@ -115,9 +109,9 @@ for ind1 in tqdm(range(0, num_samples)):
     )
 
 
-# =====================================================
-# Violation probability check
-# =====================================================
+
+#################### Violation probability check #######################
+
 
 KL_threshold = sys_param["KL_threshold"]
 
@@ -146,10 +140,6 @@ print("D(p1||p0) robust violation ratio =",
 
 print("==========================================")
 
-
-# =====================================================
-# Plot Fig. 4
-# =====================================================
 
 myf_plot_Fig4_CDF(
     sys_param,

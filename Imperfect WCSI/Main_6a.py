@@ -16,10 +16,6 @@ from fPlot import *
 sys_param = sys_param
 
 
-# =====================================================
-# Fig. 6(a) settings
-# =====================================================
-
 sys_param["N"] = 5
 
 sys_param["P_total_dBm"] = 10
@@ -33,13 +29,6 @@ sys_param["epsilon"] = 0.01
 
 sys_param["KL_threshold"] = 2 * sys_param["epsilon"] ** 2
 
-
-# =====================================================
-# Correct Fig. 6(a) CSI error values
-# Paper x-axis:
-#     v_w = 0.1, 0.2, 0.3, 0.4, 0.5
-# =====================================================
-
 v_w_cand = np.array([
     0.1,
     0.2,
@@ -48,10 +37,6 @@ v_w_cand = np.array([
     0.5
 ])
 
-
-# =====================================================
-# Monte Carlo samples
-# =====================================================
 
 num_samples = 20
 
@@ -70,31 +55,21 @@ for ind_v in range(0, np.size(v_w_cand)):
     sys_param["KL_threshold"] = 2 * sys_param["epsilon"] ** 2
 
 
-    # =====================================================
-    # Case 1:
-    #     D(p0 || p1) <= 2 epsilon^2
-    # =====================================================
+    
+    ############### Case 1:D(p0 || p1) <= 2 epsilon^2 ####################
+    
 
     t_max_D01 = myf_find_t_max_case(
         sys_param,
         "D01"
     )
 
-
-    # =====================================================
-    # Case 2:
-    #     D(p1 || p0) <= 2 epsilon^2
-    # =====================================================
+    #################### Case 2: D(p1 || p0) <= 2 epsilon^2 ############
 
     t_max_D10 = myf_find_t_max_case(
         sys_param,
         "D10"
     )
-
-
-    # =====================================================
-    # Temporary arrays
-    # =====================================================
 
     MI_D01_temp = np.zeros(num_samples)
 
@@ -102,7 +77,6 @@ for ind_v in range(0, np.size(v_w_cand)):
 
 
     for ind_sample in tqdm(range(0, num_samples)):
-
 
         param_channel = {}
 
@@ -112,11 +86,6 @@ for ind_v in range(0, np.size(v_w_cand)):
             sys_param,
             param_channel
         )
-
-
-        # =====================================================
-        # Robust design under D(p0 || p1)
-        # =====================================================
 
         sys_param["t_max"] = t_max_D01
 

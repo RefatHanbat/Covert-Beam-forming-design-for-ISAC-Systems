@@ -15,11 +15,6 @@ from fPlot import *
 
 sys_param = sys_param
 
-
-# =====================================================
-# Fig. 9 settings
-# =====================================================
-
 sys_param["N"] = 5
 
 sys_param["P_total_dBm"] = 10
@@ -30,19 +25,14 @@ sys_param["v_w"] = 0.001
 
 sys_param["KL_threshold"] = 0.02
 
-
-# =====================================================
-# Radar MI threshold for rate maximization
-# =====================================================
+######## Radar MI threshold for rate maximization #########
 
 sys_param["gamma_MI"] = 1.0
 
 sys_param["gamma_SINR"] = 2 ** (2 * sys_param["gamma_MI"]) - 1
 
+######## t_max for two KL cases #############
 
-# =====================================================
-# t_max for two KL cases
-# =====================================================
 
 t_max_D01 = myf_find_t_max_case(
     sys_param,
@@ -53,9 +43,8 @@ t_max_D10 = myf_find_t_max_case(
     sys_param,
     "D10"
 )
+###### Safety margin for solver tolerance ############
 
-
-# Safety margin for solver tolerance
 t_max_D01 = sys_param["t_max_safety"] * t_max_D01
 
 t_max_D10 = sys_param["t_max_safety"] * t_max_D10
@@ -86,16 +75,8 @@ print("t_max_D10 =", t_max_D10)
 print("===================================")
 
 
-# =====================================================
-# Monte Carlo samples
-# =====================================================
-
 num_samples = 50
 
-
-# =====================================================
-# Storage arrays
-# =====================================================
 
 D01_nonrobust = np.zeros(num_samples)
 
@@ -108,11 +89,6 @@ D10_robust = np.zeros(num_samples)
 
 for ind_sample in tqdm(range(0, num_samples)):
 
-
-    # =====================================================
-    # Generate channel
-    # =====================================================
-
     param_channel = {}
 
     param_channel["seed_seq"] = ind_sample
@@ -122,10 +98,6 @@ for ind_sample in tqdm(range(0, num_samples)):
         param_channel
     )
 
-
-    # =====================================================
-    # Generate true Willie channel
-    # =====================================================
 
     param_error = {}
 
@@ -137,11 +109,6 @@ for ind_sample in tqdm(range(0, num_samples)):
         param_error
     )
 
-
-    # =====================================================
-    # Fig. 9(a): D(p0 || p1)
-    # Rate maximization under D01 constraint
-    # =====================================================
 
     sys_param["t_max"] = t_max_D01
 
@@ -170,12 +137,6 @@ for ind_sample in tqdm(range(0, num_samples)):
         solutions_robust_D01["W_R_1"]
     )
 
-
-    # =====================================================
-    # Fig. 9(b): D(p1 || p0)
-    # Rate maximization under D10 constraint
-    # =====================================================
-
     sys_param["t_max"] = t_max_D10
 
     solutions_nonrobust_D10 = myf_algorithm_nonrobust_rate_imperfect_WCSI(
@@ -203,10 +164,6 @@ for ind_sample in tqdm(range(0, num_samples)):
         solutions_robust_D10["W_R_1"]
     )
 
-
-# =====================================================
-# Debug print
-# =====================================================
 
 KL_threshold = sys_param["KL_threshold"]
 
@@ -242,10 +199,6 @@ print("D10_robust min/max =",
 
 print("===================================")
 
-
-# =====================================================
-# Plot Fig. 9
-# =====================================================
 
 myf_plot_Fig9_CDF(
     sys_param,
