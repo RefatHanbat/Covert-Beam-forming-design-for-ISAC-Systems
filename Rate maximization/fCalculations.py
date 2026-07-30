@@ -6,6 +6,7 @@ fCalculations.py
 Refat Khan
 
 Calculation functions for rate maximization under imperfect WCSI
+
 '''
 
 
@@ -19,6 +20,7 @@ def myf_KL_from_t(t):
 
 
 def myf_find_t_max_case(sys_param, KL_case):
+
     """
     Find maximum t for one KL constraint.
 
@@ -84,6 +86,7 @@ def myf_find_t_max_case(sys_param, KL_case):
 
 
 def myf_quad_value(h, W):
+
     """
     Safely calculate h^H W h.
     """
@@ -104,6 +107,7 @@ def myf_quad_value(h, W):
 
 
 def myf_KL_divergence_Willie(sys_param, h_W_true, W_R_0, W_R_1):
+
     """
     Calculate KL divergence at Willie.
 
@@ -147,6 +151,7 @@ def myf_KL_divergence_Willie(sys_param, h_W_true, W_R_0, W_R_1):
 
 
 def myf_detection_probability_Willie(sys_param, h_W_true, W_R_0, W_R_1):
+
     """
     Calculate Willie detection probabilities.
 
@@ -218,6 +223,7 @@ def myf_Bob_rate_from_Gamma_B(sys_param, solutions):
 
 
 def myf_radar_MI_from_solution(sys_param, channel, solutions):
+
     """
     Calculate radar MI from W_R_0 and W_R_1.
     Useful for checking rate-maximization solutions.

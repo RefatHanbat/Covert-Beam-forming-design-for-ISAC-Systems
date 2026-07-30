@@ -6,6 +6,7 @@ fChannel.py
 Refat Khan
 
 Channel generation for rate maximization under imperfect WCSI
+
 '''
 
 
@@ -33,6 +34,7 @@ def myf_complex_gaussian_channel(N, variance):
 
 
 def myf_generate_Willie_error(sys_param, param_error):
+    
     """
     Generate bounded Willie CSI error.
 

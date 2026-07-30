@@ -156,7 +156,7 @@ def myf_problem_nonrobust_rate_imperfect_WCSI_feasibility(
     constraints = []
 
 
-    # Bob SINR constraint
+    ########## Bob SINR constraint ##########
     constraints.append(
         Tr_hB_WR1_hB
         >=
@@ -164,7 +164,8 @@ def myf_problem_nonrobust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Radar MI constraint
+    ############ Radar MI constraint ###########
+
     constraints.append(
         alpha_abs_2 * Tr_hT_WR0_hT * norm_h_T_2
         >=
@@ -175,7 +176,8 @@ def myf_problem_nonrobust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Non-robust covertness constraint
+    ############## Non-robust covertness constraint #########
+
     constraints.append(
         Tr_hW_WR1_hW
         <=
@@ -183,7 +185,8 @@ def myf_problem_nonrobust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Power and PSD constraints
+    ########### Power and PSD constraints #############
+
     constraints.append(
         Tr_WR0 + Tr_WR1 <= P_total
     )
@@ -258,6 +261,7 @@ def myf_problem_robust_rate_imperfect_WCSI_feasibility(
     Robust rate maximization feasibility problem.
 
     Uses S-procedure robust covertness constraint.
+    
     """
 
     N = sys_param["N"]
@@ -306,7 +310,8 @@ def myf_problem_robust_rate_imperfect_WCSI_feasibility(
     constraints = []
 
 
-    # Bob SINR constraint
+    ########### Bob SINR constraint ############
+
     constraints.append(
         Tr_hB_WR1_hB
         >=
@@ -314,7 +319,8 @@ def myf_problem_robust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Radar MI constraint
+    ############ Radar MI constraint ##########
+
     constraints.append(
         alpha_abs_2 * Tr_hT_WR0_hT * norm_h_T_2
         >=
@@ -325,7 +331,8 @@ def myf_problem_robust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Robust covertness constraint
+    ################ Robust covertness constraint ##############
+
     constraints = myf_add_robust_covertness_constraint(
         constraints,
         sys_param,
@@ -336,7 +343,8 @@ def myf_problem_robust_rate_imperfect_WCSI_feasibility(
     )
 
 
-    # Power and PSD constraints
+    ########### Power and PSD constraints #######################
+
     constraints.append(
         Tr_WR0 + Tr_WR1 <= P_total
     )
