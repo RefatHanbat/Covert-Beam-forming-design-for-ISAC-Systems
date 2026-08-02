@@ -21,6 +21,8 @@ except ModuleNotFoundError:
 
 sys_param = sys_param
 
+print(sys_param)
+
 num_samples = 10
 
 x_axis_name = "P_total_dBm_cand"
